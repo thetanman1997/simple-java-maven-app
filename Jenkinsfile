@@ -1,7 +1,10 @@
 pipeline {
-        sh  'service docker start'
-        sh  'sleep 10'
-        sh  'service docker status'
+        stage('pre docker'){
+                agent any 
+                sh  'service docker start'
+                sh  'sleep 10'
+                sh  'service docker status'
+        }
     agent {
         docker {
             
