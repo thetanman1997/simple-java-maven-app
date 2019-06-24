@@ -1,24 +1,28 @@
 pipeline {
-    agent none 
-    stage('Pre Docker'){
+        agent none 
+        stages{
+                stage('pre docker'){
                 agent any 
                 sh  'service docker start'
                 sh  'sleep 10'
                 sh  'service docker status'
-    }
-        stage('Docker'){
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
+                }
+
+                stage('Docker'){
+                        agent {
+                            docker {
+            
+                             image 'maven:3-alpine' 
+                             args '-v /root/.m2:/root/.m2' 
+                            }
+                        }
+                }
+                stage('Build') { 
+                agent any 
+                steps {
+                    sh 'mvn -B -DskipTests clean package' 
+                }   
+                }
+
         }
-    }
-   }
-    stages {
-        stage('Build') { 
-            steps {
-                sh 'mvn -B -DskipTests clean package' 
-            }
-        }
-    }
 }
