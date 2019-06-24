@@ -3,9 +3,11 @@ pipeline {
         stages{
                 stage('pre docker'){
                 agent any 
-                sh  'service docker start'
-                sh  'sleep 10'
-                sh  'service docker status'
+                    steps{
+                            sh  'service docker start'
+                            sh  'sleep 10'
+                            sh  'service docker status'
+                    }
                 }
 
                 stage('Docker'){
@@ -18,10 +20,10 @@ pipeline {
                         }
                 }
                 stage('Build') { 
-                agent any 
-                steps {
-                    sh 'mvn -B -DskipTests clean package' 
-                }   
+                agent any
+                    steps {
+                        sh 'mvn -B -DskipTests clean package' 
+                    }   
                 }
 
         }
