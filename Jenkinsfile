@@ -1,4 +1,5 @@
 pipeline {
+        agent none 
         stage('pre docker'){
                 agent any 
                 sh  'service docker start'
