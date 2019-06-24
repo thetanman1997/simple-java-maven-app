@@ -18,13 +18,9 @@ pipeline {
                              args '-v /root/.m2:/root/.m2' 
                             }
                         }
-                }
-                stage('Build') { 
-                agent any
-                    steps {
+                        steps {
                         sh 'mvn -B -DskipTests clean package' 
                     }   
                 }
-
         }
 }
