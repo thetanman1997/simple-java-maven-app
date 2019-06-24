@@ -1,8 +1,8 @@
 pipeline {
-    agent {
         sh  'service docker start'
         sh  'sleep 10'
         sh  'service docker status'
+    agent {
         docker {
             
             image 'maven:3-alpine' 
